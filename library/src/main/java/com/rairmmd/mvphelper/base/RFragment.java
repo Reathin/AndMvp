@@ -11,9 +11,8 @@ import android.view.ViewGroup;
  * @author Rair
  * @date 2017/10/25
  * <p>
- * desc:
+ * desc:RFragment
  */
-
 public abstract class RFragment<P extends IPresent> extends Fragment implements IView<P> {
 
     private P p;

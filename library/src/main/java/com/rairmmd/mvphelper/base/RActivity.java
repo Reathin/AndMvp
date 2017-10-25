@@ -9,7 +9,7 @@ import android.widget.Toast;
  * @author Rair
  * @date 2017/10/25
  * <p>
- * desc:
+ * desc:RActivity
  */
 public abstract class RActivity<P extends IPresent> extends AppCompatActivity implements IView<P> {
 

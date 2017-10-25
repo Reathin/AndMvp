@@ -7,7 +7,7 @@ import io.reactivex.disposables.Disposable;
  * @author Rair
  * @date 2017/10/25
  * <p>
- * desc:
+ * desc:RPresent
  */
 public class RPresent<V extends IView> implements IPresent<V> {
 
