@@ -19,18 +19,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * desc:单例
  */
 
-public class RApiServer {
+public class XApi {
 
-    private static RApiServer instance;
+    private static XApi instance;
 
-    private RApiServer() {
+    private XApi() {
     }
 
-    public static RApiServer getInstance() {
+    public static XApi getInstance() {
         if (instance == null) {
-            synchronized (RApiServer.class) {
+            synchronized (XApi.class) {
                 if (instance == null) {
-                    instance = new RApiServer();
+                    instance = new XApi();
                 }
             }
         }

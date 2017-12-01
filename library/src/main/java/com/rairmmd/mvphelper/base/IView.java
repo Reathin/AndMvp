@@ -1,14 +1,16 @@
 package com.rairmmd.mvphelper.base;
 
+import android.view.View;
+
 /**
  * @author Rair
  * @date 2017/10/25
  * <p>
- * desc:
+ * desc:IView
  */
 public interface IView<P> {
 
-    void getExtraData();
+    void bindUI(View rootView);
 
     void initView();
 

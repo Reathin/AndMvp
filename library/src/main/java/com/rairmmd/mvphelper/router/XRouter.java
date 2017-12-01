@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * <p>
  * desc:
  */
-public class RRouter {
+public class XRouter {
 
     private Intent intent;
     private Activity from;
@@ -30,118 +30,118 @@ public class RRouter {
 
     public static final int RES_NONE = -1;
 
-    private RRouter() {
+    private XRouter() {
         intent = new Intent();
     }
 
-    public static RRouter newIntent(Activity context) {
-        RRouter router = new RRouter();
+    public static XRouter newIntent(Activity context) {
+        XRouter router = new XRouter();
         router.from = context;
         return router;
     }
 
-    public RRouter to(Class<?> to) {
+    public XRouter to(Class<?> to) {
         this.to = to;
         return this;
     }
 
-    public RRouter addFlags(int flags) {
+    public XRouter addFlags(int flags) {
         if (intent != null) {
             intent.addFlags(flags);
         }
         return this;
     }
 
-    public RRouter data(Bundle data) {
+    public XRouter data(Bundle data) {
         this.data = data;
         return this;
     }
 
-    public RRouter putByte(@Nullable String key, byte value) {
+    public XRouter putByte(@Nullable String key, byte value) {
         getBundleData().putByte(key, value);
         return this;
     }
 
-    public RRouter putChar(@Nullable String key, char value) {
+    public XRouter putChar(@Nullable String key, char value) {
         getBundleData().putChar(key, value);
         return this;
     }
 
-    public RRouter putInt(@Nullable String key, int value) {
+    public XRouter putInt(@Nullable String key, int value) {
         getBundleData().putInt(key, value);
         return this;
     }
 
-    public RRouter putString(@Nullable String key, String value) {
+    public XRouter putString(@Nullable String key, String value) {
         getBundleData().putString(key, value);
         return this;
     }
 
-    public RRouter putShort(@Nullable String key, short value) {
+    public XRouter putShort(@Nullable String key, short value) {
         getBundleData().putShort(key, value);
         return this;
     }
 
-    public RRouter putFloat(@Nullable String key, float value) {
+    public XRouter putFloat(@Nullable String key, float value) {
         getBundleData().putFloat(key, value);
         return this;
     }
 
-    public RRouter putCharSequence(@Nullable String key, @Nullable CharSequence value) {
+    public XRouter putCharSequence(@Nullable String key, @Nullable CharSequence value) {
         getBundleData().putCharSequence(key, value);
         return this;
     }
 
-    public RRouter putParcelable(@Nullable String key, @Nullable Parcelable value) {
+    public XRouter putParcelable(@Nullable String key, @Nullable Parcelable value) {
         getBundleData().putParcelable(key, value);
         return this;
     }
 
-    public RRouter putParcelableArray(@Nullable String key, @Nullable Parcelable[] value) {
+    public XRouter putParcelableArray(@Nullable String key, @Nullable Parcelable[] value) {
         getBundleData().putParcelableArray(key, value);
         return this;
     }
 
-    public RRouter putParcelableArrayList(@Nullable String key,
+    public XRouter putParcelableArrayList(@Nullable String key,
                                           @Nullable ArrayList<? extends Parcelable> value) {
         getBundleData().putParcelableArrayList(key, value);
         return this;
     }
 
 
-    public RRouter putIntegerArrayList(@Nullable String key, @Nullable ArrayList<Integer> value) {
+    public XRouter putIntegerArrayList(@Nullable String key, @Nullable ArrayList<Integer> value) {
         getBundleData().putIntegerArrayList(key, value);
         return this;
     }
 
-    public RRouter putStringArrayList(@Nullable String key, @Nullable ArrayList<String> value) {
+    public XRouter putStringArrayList(@Nullable String key, @Nullable ArrayList<String> value) {
         getBundleData().putStringArrayList(key, value);
         return this;
     }
 
-    public RRouter putCharSequenceArrayList(@Nullable String key,
+    public XRouter putCharSequenceArrayList(@Nullable String key,
                                             @Nullable ArrayList<CharSequence> value) {
         getBundleData().putCharSequenceArrayList(key, value);
         return this;
     }
 
-    public RRouter putSerializable(@Nullable String key, @Nullable Serializable value) {
+    public XRouter putSerializable(@Nullable String key, @Nullable Serializable value) {
         getBundleData().putSerializable(key, value);
         return this;
     }
 
 
-    public RRouter options(ActivityOptionsCompat options) {
+    public XRouter options(ActivityOptionsCompat options) {
         this.options = options;
         return this;
     }
 
-    public RRouter requestCode(int requestCode) {
+    public XRouter requestCode(int requestCode) {
         this.requestCode = requestCode;
         return this;
     }
 
-    public RRouter anim(int enterAnim, int exitAnim) {
+    public XRouter anim(int enterAnim, int exitAnim) {
         this.enterAnim = enterAnim;
         this.exitAnim = exitAnim;
         return this;

@@ -7,9 +7,9 @@ import io.reactivex.disposables.Disposable;
  * @author Rair
  * @date 2017/10/25
  * <p>
- * desc:RPresent
+ * desc:BasePresent
  */
-public class RPresent<V extends IView> implements IPresent<V> {
+public class BasePresent<V extends IView> implements IPresent<V> {
 
     private V v;
     private CompositeDisposable mCompositeDisposable;
