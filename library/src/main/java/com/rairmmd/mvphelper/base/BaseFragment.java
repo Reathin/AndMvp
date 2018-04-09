@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.gyf.barlibrary.ImmersionBar;
-import com.rairmmd.mvphelper.utils.AppUtil;
+import com.rairmmd.mvphelper.utils.AppUtils;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -101,11 +101,18 @@ public abstract class BaseFragment<P extends IPresent> extends SupportFragment i
     }
 
     /**
-     * 显示Toast
+     * 显示toast
      *
-     * @param msg 内容
+     * @param msg 消息
      */
+    private Toast toast;
+
     public void showToast(String msg) {
-        Toasty.info(AppUtil.getContext(), msg, Toast.LENGTH_SHORT).show();
+        if (toast != null) {
+            toast.cancel();
+            toast = null;
+        }
+        toast = Toasty.info(AppUtils.getContext(), msg, Toast.LENGTH_SHORT);
+        toast.show();
     }
 }

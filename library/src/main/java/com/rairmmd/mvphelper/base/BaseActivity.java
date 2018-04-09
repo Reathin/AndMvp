@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.gyf.barlibrary.ImmersionBar;
-import com.rairmmd.mvphelper.utils.AppUtil;
-import com.rairmmd.mvphelper.utils.VersionUtil;
+import com.rairmmd.mvphelper.utils.AppUtils;
+import com.rairmmd.mvphelper.utils.VersionUtils;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -61,10 +61,6 @@ public abstract class BaseActivity<P extends IPresent> extends SupportActivity i
             getP().detachV();
         }
         if (mImmersionBar != null) {
-            /**
-             *  必须调用该方法，防止内存泄漏，不调用该方法，如果界面bar发生改变，
-             *  在不关闭app的情况下，退出此界面再进入将记忆最后一次bar改变的状态
-             */
             mImmersionBar.destroy();
         }
         p = null;
@@ -98,7 +94,7 @@ public abstract class BaseActivity<P extends IPresent> extends SupportActivity i
     protected void setToolbar(Toolbar toolbar, String title, boolean isCanBack, boolean isTranslucentStatus) {
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
-        if (VersionUtil.isLollipop()) {
+        if (VersionUtils.isLollipop()) {
             //5.0以上，设置toolbar阴影
             toolbar.setElevation(8F);
         }
@@ -124,11 +120,11 @@ public abstract class BaseActivity<P extends IPresent> extends SupportActivity i
     protected void setToolbar(Toolbar toolbar, String title, boolean isSetElevation, boolean isCanBack, boolean isTranslucentStatus) {
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
-        if (VersionUtil.isLollipop() && isSetElevation) {
+        if (VersionUtils.isLollipop() && isSetElevation) {
             //5.0以上，设置toolbar阴影
             toolbar.setElevation(8F);
         }
-        if (isCanBack) {
+        if (isCanBack && getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             toolbar.setNavigationOnClickListener(v -> ActivityCompat.finishAfterTransition(this));
         }
@@ -152,9 +148,16 @@ public abstract class BaseActivity<P extends IPresent> extends SupportActivity i
     /**
      * 显示toast
      *
-     * @param msg 内容
+     * @param msg
      */
+    private Toast toast;
+
     public void showToast(String msg) {
-        Toasty.info(AppUtil.getContext(), msg, Toast.LENGTH_SHORT).show();
+        if (toast != null) {
+            toast.cancel();
+            toast = null;
+        }
+        toast = Toasty.info(AppUtils.getContext(), msg, Toast.LENGTH_SHORT);
+        toast.show();
     }
 }

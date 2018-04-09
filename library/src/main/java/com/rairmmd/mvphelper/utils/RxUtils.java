@@ -9,7 +9,7 @@ import io.reactivex.schedulers.Schedulers;
  * RxJava工具类
  */
 
-public class RxUtil {
+public class RxUtils {
 
 
     private static final ObservableTransformer SCHEDULERS_TRANSFORMER = observable -> observable.subscribeOn(Schedulers.io())

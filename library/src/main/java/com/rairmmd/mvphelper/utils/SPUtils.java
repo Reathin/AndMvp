@@ -16,17 +16,17 @@ import java.util.Set;
  * </pre>
  */
 @SuppressLint("ApplySharedPref")
-public final class SPUtil {
+public final class SPUtils {
 
-    private static SimpleArrayMap<String, SPUtil> SP_UTILS_MAP = new SimpleArrayMap<>();
+    private static SimpleArrayMap<String, SPUtils> SP_UTILS_MAP = new SimpleArrayMap<>();
     private SharedPreferences sp;
 
     /**
      * 获取SP实例
      *
-     * @return {@link SPUtil}
+     * @return {@link SPUtils}
      */
-    public static SPUtil getInstance() {
+    public static SPUtils getInstance() {
         return getInstance("");
     }
 
@@ -34,22 +34,22 @@ public final class SPUtil {
      * 获取SP实例
      *
      * @param spName sp名
-     * @return {@link SPUtil}
+     * @return {@link SPUtils}
      */
-    public static SPUtil getInstance(String spName) {
+    public static SPUtils getInstance(String spName) {
         if (isSpace(spName)) {
             spName = "rair";
         }
-        SPUtil spUtils = SP_UTILS_MAP.get(spName);
+        SPUtils spUtils = SP_UTILS_MAP.get(spName);
         if (spUtils == null) {
-            spUtils = new SPUtil(spName);
+            spUtils = new SPUtils(spName);
             SP_UTILS_MAP.put(spName, spUtils);
         }
         return spUtils;
     }
 
-    private SPUtil(final String spName) {
-        sp = AppUtil.getContext().getSharedPreferences(spName, Context.MODE_PRIVATE);
+    private SPUtils(final String spName) {
+        sp = AppUtils.getContext().getSharedPreferences(spName, Context.MODE_PRIVATE);
     }
 
     /**

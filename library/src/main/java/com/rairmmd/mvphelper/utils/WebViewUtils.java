@@ -8,11 +8,11 @@ import android.annotation.SuppressLint;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
-public class WebViewUtil {
+public class WebViewUtils {
     private WebView webView;
     private WebSettings webSettings;
 
-    public WebViewUtil(WebView webView){
+    public WebViewUtils(WebView webView){
         this.webView = webView;
         webSettings = webView.getSettings();
         webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
@@ -21,7 +21,7 @@ public class WebViewUtil {
     /**
      * 开启自适应功能
      */
-    public WebViewUtil enableAdaptive(){
+    public WebViewUtils enableAdaptive(){
         webSettings.setUseWideViewPort(true);
         webSettings.setLoadWithOverviewMode(true);
         return this;
@@ -30,7 +30,7 @@ public class WebViewUtil {
     /**
      * 禁用自适应功能
      */
-    public WebViewUtil disableAdaptive(){
+    public WebViewUtils disableAdaptive(){
         webSettings.setUseWideViewPort(true);
         webSettings.setLoadWithOverviewMode(true);
         return this;
@@ -39,7 +39,7 @@ public class WebViewUtil {
     /**
      * 开启缩放功能
      */
-    public WebViewUtil enableZoom(){
+    public WebViewUtils enableZoom(){
         webSettings.setSupportZoom(true);
         webSettings.setUseWideViewPort(true);
         webSettings.setBuiltInZoomControls(true);
@@ -49,7 +49,7 @@ public class WebViewUtil {
     /**
      * 禁用缩放功能
      */
-    public WebViewUtil disableZoom(){
+    public WebViewUtils disableZoom(){
         webSettings.setSupportZoom(false);
         webSettings.setUseWideViewPort(false);
         webSettings.setBuiltInZoomControls(false);
@@ -60,7 +60,7 @@ public class WebViewUtil {
      * 开启JavaScript
      */
     @SuppressLint("SetJavaScriptEnabled")
-    public WebViewUtil enableJavaScript(){
+    public WebViewUtils enableJavaScript(){
         webSettings.setJavaScriptEnabled(true);
         return this;
     }
@@ -68,7 +68,7 @@ public class WebViewUtil {
     /**
      * 禁用JavaScript
      */
-    public WebViewUtil disableJavaScript(){
+    public WebViewUtils disableJavaScript(){
         webSettings.setJavaScriptEnabled(false);
         return this;
     }
@@ -76,7 +76,7 @@ public class WebViewUtil {
     /**
      * 开启JavaScript自动弹窗
      */
-    public WebViewUtil enableJavaScriptOpenWindowsAutomatically(){
+    public WebViewUtils enableJavaScriptOpenWindowsAutomatically(){
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
         return this;
     }
@@ -84,7 +84,7 @@ public class WebViewUtil {
     /**
      * 禁用JavaScript自动弹窗
      */
-    public WebViewUtil disableJavaScriptOpenWindowsAutomatically(){
+    public WebViewUtils disableJavaScriptOpenWindowsAutomatically(){
         webSettings.setJavaScriptCanOpenWindowsAutomatically(false);
         return this;
     }

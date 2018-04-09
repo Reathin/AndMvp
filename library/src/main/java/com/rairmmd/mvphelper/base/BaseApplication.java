@@ -4,16 +4,13 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
-import android.graphics.Color;
 
 import com.rairmmd.mvphelper.BuildConfig;
-import com.rairmmd.mvphelper.utils.AppUtil;
-import com.rairmmd.mvphelper.utils.SPUtil;
+import com.rairmmd.mvphelper.utils.AppUtils;
+import com.rairmmd.mvphelper.utils.SPUtils;
 import com.socks.library.KLog;
 
 import java.util.Stack;
-
-import es.dmoral.toasty.Toasty;
 
 /**
  * Created by Rair on 2017/12/1.
@@ -35,13 +32,10 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         sInstance = this;
-        AppUtil.init(this);
-        SPUtil.getInstance();
+        AppUtils.init(this);
+        SPUtils.getInstance();
         //初始化log日志
         KLog.init(BuildConfig.LOG_DEBUG, "Rair");
-        //初始化Toasty
-        Toasty.Config.getInstance().setInfoColor(Color.parseColor("#a9dbfe"))
-                .setSuccessColor(Color.parseColor("#a9dbfe")).apply();
     }
 
     /**
@@ -66,7 +60,11 @@ public class BaseApplication extends Application {
      */
     public void finishActivity() {
         Activity activity = activityStack.lastElement();
-        finishActivity(activity);
+        if (activity == null) {
+            return;
+        } else {
+            finishActivity(activity);
+        }
     }
 
     /**
@@ -85,7 +83,7 @@ public class BaseApplication extends Application {
      */
     public void finishActivity(Class<?> cls) {
         for (Activity activity : activityStack) {
-            if (activity.getClass().equals(cls)) {
+            if (activity != null && activity.getClass().equals(cls)) {
                 finishActivity(activity);
                 return;
             }
@@ -114,8 +112,8 @@ public class BaseApplication extends Application {
             ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
             if (activityManager != null) {
                 activityManager.killBackgroundProcesses(context.getPackageName());
-                System.exit(0);
             }
+            System.exit(0);
         } catch (Exception e) {
             KLog.e("app exit" + e.getMessage());
         }

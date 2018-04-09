@@ -53,8 +53,8 @@ import java.lang.ref.WeakReference;
  * @Description:主要功能:用于设置文字的前景色、背景色、Typeface、粗体、斜体、字号、超链接、删除线、下划线、上下标等
  */
 
-public class SpannableStringUtil {
-    private SpannableStringUtil() {
+public class SpannableStringUtils {
+    private SpannableStringUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
@@ -708,7 +708,7 @@ public class SpannableStringUtil {
             }
             if (imageIsBitmap || imageIsDrawable || imageIsUri || imageIsResourceId) {
                 if (imageIsBitmap) {
-                    mBuilder.setSpan(new CustomImageSpan(AppUtil.getContext(), bitmap, align), start, end, flag);
+                    mBuilder.setSpan(new CustomImageSpan(AppUtils.getContext(), bitmap, align), start, end, flag);
                     bitmap = null;
                     imageIsBitmap = false;
                 } else if (imageIsDrawable) {
@@ -716,11 +716,11 @@ public class SpannableStringUtil {
                     drawable = null;
                     imageIsDrawable = false;
                 } else if (imageIsUri) {
-                    mBuilder.setSpan(new CustomImageSpan(AppUtil.getContext(), uri, align), start, end, flag);
+                    mBuilder.setSpan(new CustomImageSpan(AppUtils.getContext(), uri, align), start, end, flag);
                     uri = null;
                     imageIsUri = false;
                 } else {
-                    mBuilder.setSpan(new CustomImageSpan(AppUtil.getContext(), resourceId, align), start, end, flag);
+                    mBuilder.setSpan(new CustomImageSpan(AppUtils.getContext(), resourceId, align), start, end, flag);
                     resourceId = 0;
                     imageIsResourceId = false;
                 }

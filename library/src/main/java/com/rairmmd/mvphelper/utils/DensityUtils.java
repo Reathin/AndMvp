@@ -7,9 +7,9 @@ import android.util.TypedValue;
  * @Description:主要功能:常用单位转换的辅助类
  */
 
-public class DensityUtil {
+public class DensityUtils {
 
-    private DensityUtil() {
+    private DensityUtils() {
         throw new UnsupportedOperationException("cannot be instantiated");
     }
 

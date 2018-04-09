@@ -23,11 +23,11 @@ import static android.content.Context.VIBRATOR_SERVICE;
 /**
  * <p>Utils初始化相关 </p>
  */
-public class AppUtil {
+public class AppUtils {
 
     private static Context context;
 
-    private AppUtil() {
+    private AppUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
@@ -37,7 +37,7 @@ public class AppUtil {
      * @param context Application上下文
      */
     public static void init(Context context) {
-        AppUtil.context = context.getApplicationContext();
+        AppUtils.context = context.getApplicationContext();
     }
 
     /**
@@ -147,7 +147,7 @@ public class AppUtil {
      * @param compressListener 结果监听
      */
     public static void compressPic(File file, OnCompressListener compressListener) {
-        Luban.with(AppUtil.getContext())
+        Luban.with(AppUtils.getContext())
                 .load(file)
                 .ignoreBy(100)
                 .setCompressListener(compressListener)

@@ -37,7 +37,7 @@ import java.util.List;
  * @version: 1.0.0
  */
 
-public class NetworkUtil {
+public class NetworkUtils {
     //未找到合适匹配网络类型
     public static final int TYPE_NO = 0;
 
@@ -98,45 +98,45 @@ public class NetworkUtil {
             if (currentNetWork == ConnectivityManager.TYPE_MOBILE) {
                 if (networkInfo.getExtraInfo() != null) {
                     if (networkInfo.getExtraInfo().equals("cmnet")) {
-                        KLog.i("NetworkUtil", "当前网络为中国移动CMNET网络");
+                        KLog.i("NetworkUtils", "当前网络为中国移动CMNET网络");
                         return TYPE_MOBILE_CMNET;
                     }
                     if (networkInfo.getExtraInfo().equals("cmwap")) {
-                        KLog.i("NetworkUtil", "当前网络为中国移动CMWAP网络");
+                        KLog.i("NetworkUtils", "当前网络为中国移动CMWAP网络");
                         return TYPE_MOBILE_CMWAP;
                     }
                     if (networkInfo.getExtraInfo().equals("uniwap")) {
-                        KLog.i("NetworkUtil", "当前网络为中国联通UNIWAP网络");
+                        KLog.i("NetworkUtils", "当前网络为中国联通UNIWAP网络");
                         return TYPE_MOBILE_UNIWAP;
                     }
                     if (networkInfo.getExtraInfo().equals("3gwap")) {
-                        KLog.i("NetworkUtil", "当前网络为中国联通3GWAP网络");
+                        KLog.i("NetworkUtils", "当前网络为中国联通3GWAP网络");
                         return TYPE_MOBILE_3GWAP;
                     }
                     if (networkInfo.getExtraInfo().equals("3gnet")) {
-                        KLog.i("NetworkUtil", "当前网络为中国联通3GNET网络");
+                        KLog.i("NetworkUtils", "当前网络为中国联通3GNET网络");
                         return TYPE_MOBLIE_3GNET;
                     }
                     if (networkInfo.getExtraInfo().equals("uninet")) {
-                        KLog.i("NetworkUtil", "当前网络为中国联通UNINET网络");
+                        KLog.i("NetworkUtils", "当前网络为中国联通UNINET网络");
                         return TYPE_MOBILE_UNINET;
                     }
                     if (networkInfo.getExtraInfo().equals("ctwap")) {
-                        KLog.i("NetworkUtil", "当前网络为中国电信CTWAP网络");
+                        KLog.i("NetworkUtils", "当前网络为中国电信CTWAP网络");
                         return TYPE_MOBILE_UNINET;
                     }
                     if (networkInfo.getExtraInfo().equals("ctnet")) {
-                        KLog.i("NetworkUtil", "当前网络为中国电信CTNET网络");
+                        KLog.i("NetworkUtils", "当前网络为中国电信CTNET网络");
                         return TYPE_MOBILE_UNINET;
                     }
                 }
                 //WIFI网络类型
             } else if (currentNetWork == ConnectivityManager.TYPE_WIFI) {
-                KLog.i("NetworkUtil", "当前网络为WIFI网络");
+                KLog.i("NetworkUtils", "当前网络为WIFI网络");
                 return TYPE_WIFI;
             }
         }
-        KLog.i("NetworkUtil-->>NetworkUtils", "当前网络为不是我们考虑的网络");
+        KLog.i("NetworkUtils-->>NetworkUtils", "当前网络为不是我们考虑的网络");
         return TYPE_NO;
     }
 
@@ -154,7 +154,7 @@ public class NetworkUtil {
             if (mNetworkInfo != null) {
                 //判断是TYPE_MOBILE网络
                 if (ConnectivityManager.TYPE_MOBILE == mNetworkInfo.getType()) {
-                    KLog.i("NetworkUtil", "网络连接类型为：TYPE_MOBILE");
+                    KLog.i("NetworkUtils", "网络连接类型为：TYPE_MOBILE");
                     //判断移动网络连接状态
                     State STATE_MOBILE = mConnectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState();
                     if (STATE_MOBILE == State.CONNECTED) {
@@ -164,11 +164,11 @@ public class NetworkUtil {
                 }
                 //判断是TYPE_WIFI网络
                 if (ConnectivityManager.TYPE_WIFI == mNetworkInfo.getType()) {
-                    KLog.i("NetworkUtil", "网络连接类型为：TYPE_WIFI");
+                    KLog.i("NetworkUtils", "网络连接类型为：TYPE_WIFI");
                     //判断WIFI网络状态
                     State STATE_WIFI = mConnectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState();
                     if (STATE_WIFI == State.CONNECTED) {
-                        KLog.i("NetworkUtil", "网络连接类型为：TYPE_WIFI, 网络连接状态CONNECTED成功！");
+                        KLog.i("NetworkUtils", "网络连接类型为：TYPE_WIFI, 网络连接状态CONNECTED成功！");
                         return mNetworkInfo.isAvailable();
                     }
                 }

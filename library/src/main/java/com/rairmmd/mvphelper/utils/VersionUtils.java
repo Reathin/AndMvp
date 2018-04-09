@@ -6,7 +6,7 @@ import android.os.Build;
  * @Description:主要功能:andoid 版本工具，用于判断当前版本是否大于某个版本
  */
 
-public class VersionUtil {
+public class VersionUtils {
     /**
      * 是否在2.2版本及以上
      *

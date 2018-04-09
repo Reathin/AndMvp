@@ -13,7 +13,7 @@ import java.util.Date;
  * @author AIll.
  * @description 时间日期工具类
  */
-public class DateUtil {
+public class DateUtils {
     public static String[] WEEK = new String[]{"天", "一", "二", "三", "四", "五", "六"};
 
     private static final long ONE_SECOND = 1000;

@@ -10,9 +10,9 @@ import java.util.regex.Pattern;
  *     desc  : 正则相关工具类
  * </pre>
  */
-public final class RegexUtil {
+public final class RegexUtils {
 
-    private RegexUtil() {
+    private RegexUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 

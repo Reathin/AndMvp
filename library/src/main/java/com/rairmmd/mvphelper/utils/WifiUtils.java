@@ -15,7 +15,7 @@ import java.util.List;
  * 主要功能:Wifi管理工具类
  */
 
-public class WifiUtil {
+public class WifiUtils {
     private final ConnectivityManager connectivityManager;
     private WifiManager wifiManager;    //声明Wifi管理对象
     private WifiInfo wifiInfo;  // Wifi信息
@@ -23,11 +23,11 @@ public class WifiUtil {
     private List<WifiConfiguration> wifiConfigList;// 网络配置列表
     private WifiLock wifiLock;// Wifi锁
 
-    private static WifiUtil wifiHelperMgr;
+    private static WifiUtils wifiHelperMgr;
 
-    public static WifiUtil getInstance() {
+    public static WifiUtils getInstance() {
         if (wifiHelperMgr == null) {
-            wifiHelperMgr = new WifiUtil(AppUtil.getContext());
+            wifiHelperMgr = new WifiUtils(AppUtils.getContext());
         }
         return wifiHelperMgr;
     }
@@ -38,7 +38,7 @@ public class WifiUtil {
      *
      * @param context
      */
-    public WifiUtil(Context context) {
+    public WifiUtils(Context context) {
         // 获取Wifi服务
         this.wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         // 得到Wifi信息

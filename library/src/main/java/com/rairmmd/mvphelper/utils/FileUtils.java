@@ -36,13 +36,13 @@ import java.util.zip.GZIPOutputStream;
  * @Description:主要功能:文件管理
  */
 
-public class FileUtil {
+public class FileUtils {
 
-    private FileUtil() {
+    private FileUtils() {
         throw new UnsupportedOperationException("cannot be instantiated");
     }
 
-    private static final String TAG = FileUtil.class.getSimpleName();
+    private static final String TAG = FileUtils.class.getSimpleName();
 
 
     /**
@@ -64,7 +64,7 @@ public class FileUtil {
         File destDir = new File(filePath);
         if (!destDir.exists()) {
             boolean isCreate = destDir.mkdirs();
-            Log.i("FileUtil", filePath + " has created. " + isCreate);
+            Log.i("FileUtils", filePath + " has created. " + isCreate);
         }
         return destDir;
     }

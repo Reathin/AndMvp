@@ -13,12 +13,12 @@ import android.view.WindowManager;
  * @Description:主要功能:窗口工具箱
  */
 
-public final class WindowUtil {
+public final class WindowUtils {
 
     /**
      * Don't let anyone instantiate this class.
      */
-    private WindowUtil() {
+    private WindowUtils() {
         throw new Error("Do not need instantiate!");
     }
 
