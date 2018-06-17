@@ -42,7 +42,7 @@ public class BasePresent<V extends IView> implements IPresent<V> {
     /**
      * 取消订阅
      */
-    public void dispose() {
+    private void dispose() {
         if (mCompositeDisposable != null) {
             mCompositeDisposable.dispose();
         }

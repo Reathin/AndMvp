@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.rairmmd.mvphelper.utils.AppUtils;
+import com.rairmmd.mvphelper.utils.DensityUtils;
 import com.rairmmd.mvphelper.utils.VersionUtils;
 
 import butterknife.ButterKnife;
@@ -95,8 +96,7 @@ public abstract class BaseActivity<P extends IPresent> extends SupportActivity i
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
         if (VersionUtils.isLollipop()) {
-            //5.0以上，设置toolbar阴影
-            toolbar.setElevation(8F);
+            toolbar.setElevation(DensityUtils.dip2px(AppUtils.getContext(), 4));
         }
         if (isCanBack && getSupportActionBar() != null) {
             //返回键
@@ -121,15 +121,13 @@ public abstract class BaseActivity<P extends IPresent> extends SupportActivity i
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
         if (VersionUtils.isLollipop() && isSetElevation) {
-            //5.0以上，设置toolbar阴影
-            toolbar.setElevation(8F);
+            toolbar.setElevation(DensityUtils.dip2px(AppUtils.getContext(), 4));
         }
         if (isCanBack && getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             toolbar.setNavigationOnClickListener(v -> ActivityCompat.finishAfterTransition(this));
         }
         if (isTranslucentStatus) {
-            //透明状态栏
             mImmersionBar.titleBar(toolbar).init();
         }
     }
@@ -139,7 +137,7 @@ public abstract class BaseActivity<P extends IPresent> extends SupportActivity i
      *
      * @param title 标题
      */
-    public void setTitle(String title) {
+    protected void setTitle(String title) {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(title);
         }

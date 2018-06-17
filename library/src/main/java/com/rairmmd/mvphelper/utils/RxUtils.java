@@ -15,9 +15,6 @@ public class RxUtils {
     private static final ObservableTransformer SCHEDULERS_TRANSFORMER = observable -> observable.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread());
 
-    /**
-     * 线程调度
-     */
     public static <T> ObservableTransformer<T, T> applySchedulers() {
         return (ObservableTransformer<T, T>) SCHEDULERS_TRANSFORMER;
     }
