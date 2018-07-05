@@ -6,6 +6,7 @@ A simple one MVP library for Android.
 #### BaseActivity 
 
 
+
 #### BaseFragment
 
 
@@ -47,15 +48,17 @@ api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.36'
 //EventBus
 api "org.greenrobot:eventbus:3.1.1"
 ```
-* AndPermission动态权限：
+* AndPermission：
+* RxJava2:
+* Retrofit2:
 * ButterKnife:
 * material-dialog:
 * Toasty:
 * KLog:
-* Fragmentation:
+* fragmentation:
 * barlibrary:
-* 鲁班图片压缩:
+* Luban:
 * Picasso:
 * Album:
-* BRVAH通用适配器：
+* BaseRecyclerViewAdapterHelper：
 * EventBus：
