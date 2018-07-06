@@ -37,6 +37,7 @@ public abstract class BaseFragment<P extends IPresent> extends SupportFragment i
     protected ImmersionBar mImmersionBar;
     private Unbinder unbinder;
     private MaterialDialog messageDialog;
+    private MaterialDialog loadingDialog;
 
     @Nullable
     @Override
@@ -129,6 +130,18 @@ public abstract class BaseFragment<P extends IPresent> extends SupportFragment i
 
     protected void translucentStatus(Toolbar toolbar) {
         mImmersionBar.titleBar(toolbar).init();
+    }
+
+
+    public void showLoadingDiaolg() {
+        loadingDialog = new MaterialDialog.Builder(context)
+                .content("正在加载...").show();
+    }
+
+    public void dismissLoadingDialog() {
+        if (loadingDialog != null) {
+            loadingDialog.dismiss();
+        }
     }
 
     public void showMessageDialog(String message) {

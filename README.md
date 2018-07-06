@@ -112,7 +112,7 @@ public class MainActivity extends BaseActivity {
     }
 }
 ```
-正常一个V对应一个P的情况
+* 正常一个V对应一个P的情况
 ```java
 public class MainActivity extends BaseActivity<MainPresenter> {
 
