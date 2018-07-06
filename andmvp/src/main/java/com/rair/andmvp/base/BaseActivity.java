@@ -126,14 +126,14 @@ public abstract class BaseActivity<P extends IPresent> extends SupportActivity i
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
         if (VersionUtils.isLollipop()) {
-            toolbar.setElevation(DensityUtils.dip2px(this, 4));
+            toolbar.setElevation(DensityUtils.dip2px(this, 4f));
         }
         if (isCanBack && getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ActivityCompat.finishAfterTransition(BaseActivity.this);
+                    ActivityCompat.finishAfterTransition(context);
                 }
             });
         }
@@ -157,7 +157,7 @@ public abstract class BaseActivity<P extends IPresent> extends SupportActivity i
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ActivityCompat.finishAfterTransition(BaseActivity.this);
+                    ActivityCompat.finishAfterTransition(context);
                 }
             });
         }
@@ -178,14 +178,14 @@ public abstract class BaseActivity<P extends IPresent> extends SupportActivity i
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
         if (VersionUtils.isLollipop() && isElevation) {
-            toolbar.setElevation(8F);
+            toolbar.setElevation(DensityUtils.dip2px(this, 4f));
         }
         if (isCanBack && getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ActivityCompat.finishAfterTransition(BaseActivity.this);
+                    ActivityCompat.finishAfterTransition(context);
                 }
             });
         }
@@ -223,7 +223,7 @@ public abstract class BaseActivity<P extends IPresent> extends SupportActivity i
         loadingDialog = new MaterialDialog.Builder(this)
                 .progress(true, 0).canceledOnTouchOutside(false)
                 .progressIndeterminateStyle(false).content("正在加载...")
-                .title("提示").show();
+                .show();
     }
 
     public void dismissLoadingDialog() {
