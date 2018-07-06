@@ -1,6 +1,8 @@
 ### AndMvp
 A simple one MVP library for Android.
 
+MVP框架，基类封装，集成工具类。
+
 ### 使用
 
 #### BaseActivity 
