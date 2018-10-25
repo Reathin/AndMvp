@@ -5,12 +5,15 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.provider.Settings;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 
 import java.io.File;
@@ -55,6 +58,21 @@ public class AppUtils {
     }
 
     /**
+     * 是否支持指纹
+     */
+    private boolean isSupportFingerPrint() {
+        if (VersionUtils.isM()) {
+            FingerprintManager fingerprintManager = (FingerprintManager) AppUtils
+                    .getContext().getSystemService(Context.FINGERPRINT_SERVICE);
+            if (fingerprintManager != null && fingerprintManager.isHardwareDetected()
+                    && fingerprintManager.hasEnrolledFingerprints()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * View获取Activity的工具
      *
      * @param view view
@@ -83,6 +101,16 @@ public class AppUtils {
     }
 
     /**
+     * 全局获取color的方法
+     *
+     * @param colorId 资源ID
+     * @return color
+     */
+    public static int getColor(@ColorRes int colorId) {
+        return ContextCompat.getColor(context, colorId);
+    }
+
+    /**
      * 获取androidId
      *
      * @return AndroidId
@@ -94,10 +122,9 @@ public class AppUtils {
     /**
      * 获取App包 信息版本号
      *
-     * @param context
-     * @return
+     * @return PackageInfo
      */
-    public static PackageInfo getPackageInfo(Context context) {
+    public static PackageInfo getPackageInfo() {
         PackageManager packageManager = context.getPackageManager();
         PackageInfo packageInfo = null;
         try {
@@ -111,28 +138,28 @@ public class AppUtils {
     /**
      * 获取App包名
      *
-     * @param context context
-     * @return String
+     * @return PackageName
      */
-    public static String getAppPackageName(Context context) {
+    public static String getAppPackageName() {
         return context.getPackageName();
     }
 
     /**
      * 获取版本号
      *
-     * @param context
-     * @return
+     * @return AppVersion
      */
-    public static String getAppVersion(Context context) {
-        return getPackageInfo(context).versionName;
+    public static String getAppVersion() {
+        return getPackageInfo().versionName;
     }
 
     /**
-     * 震动200毫秒
+     * 震动
+     *
+     * @param milliseconds 时长
      */
-    public static void vibrate(Activity activity) {
-        Vibrator vibrator = (Vibrator) activity.getSystemService(VIBRATOR_SERVICE);
+    public static void vibrate(long milliseconds) {
+        Vibrator vibrator = (Vibrator) context.getSystemService(VIBRATOR_SERVICE);
         if (vibrator == null) {
             return;
         }

@@ -4,13 +4,18 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
+import android.support.annotation.ColorRes;
 
 import com.rair.andmvp.cockroach.Cockroach;
 import com.rair.andmvp.cockroach.ExceptionHandler;
+import com.rair.andmvp.loader.ImageLoader;
 import com.rair.andmvp.utils.AppUtils;
 import com.socks.library.KLog;
 
 import java.util.Stack;
+
+import es.dmoral.toasty.Toasty;
 
 /**
  * @author Rair
@@ -23,7 +28,7 @@ public class BaseApplication extends Application {
 
     private static BaseApplication instance;
     /**
-     * Activity
+     * Activity堆栈
      */
     private Stack<Activity> activityStack;
 
@@ -37,6 +42,26 @@ public class BaseApplication extends Application {
         instance = this;
         AppUtils.init(this);
         initCrashHandler();
+        ImageLoader.initAlbum();
+    }
+
+    /**
+     * 初始化日志
+     *
+     * @param isDebug isDebug
+     * @param tag     tag
+     */
+    protected void initLog(boolean isDebug, String tag) {
+        KLog.init(isDebug, tag);
+    }
+
+    /**
+     * 初始化toasty
+     *
+     * @param colorId 颜色
+     */
+    protected void initToast(@ColorRes int colorId) {
+        Toasty.Config.getInstance().setInfoColor(AppUtils.getColor(colorId)).apply();
     }
 
     /**
@@ -143,16 +168,27 @@ public class BaseApplication extends Application {
     }
 
     /**
-     * 退出应用程序
-     *
-     * @param context Context
+     * 重启应用
      */
-    public void exitApplication(Context context) {
+    public void restartApplication() {
+        Intent intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
+        if (intent != null) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        } else {
+            exitApplication();
+        }
+    }
+
+    /**
+     * 退出应用程序
+     */
+    public void exitApplication() {
         try {
             finishAllActivity();
-            ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+            ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
             if (activityManager != null) {
-                activityManager.killBackgroundProcesses(context.getPackageName());
+                activityManager.killBackgroundProcesses(getPackageName());
             }
             System.exit(0);
         } catch (Exception e) {

@@ -1,11 +1,7 @@
 package com.rair.mvpdemo;
 
-import android.support.v4.content.ContextCompat;
-
 import com.rair.andmvp.base.BaseApplication;
-import com.socks.library.KLog;
-
-import es.dmoral.toasty.Toasty;
+import com.rair.andmvp.utils.SPUtils;
 
 /**
  * @author Rair
@@ -18,9 +14,8 @@ public class App extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        KLog.init(BuildConfig.LOG_DEBUG, "Rair");
-        Toasty.Config.getInstance()
-                .setInfoColor(ContextCompat.getColor(this, R.color.colorAccent))
-                .apply();
+        initLog(true, "rair");
+        initToast(R.color.colorAccent);
+        SPUtils.init("rair");
     }
 }

@@ -45,7 +45,6 @@ public class FileUtils {
 
     private static final String TAG = FileUtils.class.getSimpleName();
 
-
     /**
      * 创建目录
      *
@@ -72,7 +71,7 @@ public class FileUtils {
     /**
      * 删除文件（若为目录，则递归删除子目录和文件）
      *
-     * @param file
+     * @param file file
      * @param delThisPath true代表删除参数指定file，false代表保留参数指定file
      */
     public static void delFile(File file, boolean delThisPath) {
@@ -97,7 +96,7 @@ public class FileUtils {
     /**
      * 获取文件大小，单位为byte（若为目录，则包括所有子目录和文件）
      *
-     * @param file
+     * @param file file
      */
     public static long getFileSize(File file) {
         long size = 0;

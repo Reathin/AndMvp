@@ -23,8 +23,8 @@ public class DateUtils {
     /**
      * 当月最大天数
      *
-     * @param date
-     * @return
+     * @param date Date
+     * @return int
      */
     public static int maxDaysOfMonth(Date date) {
         return calendar(date).getActualMaximum(Calendar.DATE);
@@ -33,8 +33,8 @@ public class DateUtils {
     /**
      * 当月第一天在月份表中的索引
      *
-     * @param date
-     * @return
+     * @param date Date
+     * @return int
      */
     public static int firstDayOfMonthIndex(Date date) {
         Calendar calendar = calendar(date);
@@ -45,7 +45,7 @@ public class DateUtils {
     /**
      * 给定日期是否是今天所在的月份
      *
-     * @param date
+     * @param date Date
      * @return 今天是当月几号
      */
     public static int isTodayOfMonth(Date date) {
@@ -63,10 +63,10 @@ public class DateUtils {
     /**
      * 比较是否相同
      *
-     * @param calendarA
-     * @param calendarB
-     * @param field
-     * @return
+     * @param calendarA calendarA
+     * @param calendarB calendarB
+     * @param field     field
+     * @return boolean
      */
     public static boolean equals(Calendar calendarA, Calendar calendarB, int field) {
         boolean same;
@@ -81,9 +81,9 @@ public class DateUtils {
     /**
      * 区间内有多少个月
      *
-     * @param sDate
-     * @param eDate
-     * @return
+     * @param sDate sDate
+     * @param eDate eDate
+     * @return int
      */
     public static int months(Date sDate, Date eDate) {
         Calendar before = calendar(min(sDate, eDate));
@@ -104,9 +104,9 @@ public class DateUtils {
     /**
      * 获取区间内各月的Date
      *
-     * @param sDate
-     * @param eDate
-     * @return
+     * @param sDate sDate
+     * @param eDate eDate
+     * @return List<Date>
      */
     public static List<Date> fillMonths(Date sDate, Date eDate) {
         List<Date> dates = new ArrayList<>();
@@ -128,9 +128,9 @@ public class DateUtils {
     /**
      * 根据月份及日期索引计算出指定日期
      *
-     * @param month
-     * @param index
-     * @return
+     * @param month month
+     * @param index index
+     * @return Date
      */
     public static Date specialDayInMonth(Date month, int index) {
         Calendar calendar = calendar(month);

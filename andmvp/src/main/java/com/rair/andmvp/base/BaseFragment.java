@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,8 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.gyf.barlibrary.ImmersionBar;
 import com.rair.andmvp.utils.AppUtils;
+import com.rair.andmvp.utils.DensityUtils;
+import com.rair.andmvp.utils.VersionUtils;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -60,6 +64,91 @@ public abstract class BaseFragment<P extends IPresent> extends SupportFragment i
     @Override
     public void bindUI(View rootView) {
         unbinder = ButterKnife.bind(this, rootView);
+    }
+
+    /**
+     * 设置toolbar
+     *
+     * @param title     标题
+     * @param isCanBack 是否设置返回键
+     */
+    protected void setToolbar(Toolbar toolbar, String title, boolean isCanBack) {
+        toolbar.setTitle(title);
+        if ((getActivity()) != null) {
+            ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        }
+        if (VersionUtils.isLollipop()) {
+            toolbar.setElevation(DensityUtils.dp2px(4f));
+        }
+        ActionBar supportActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (isCanBack && supportActionBar != null) {
+            supportActionBar.setDisplayHomeAsUpEnabled(true);
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    pop();
+                }
+            });
+        }
+    }
+
+    /**
+     * 设置toolbar
+     *
+     * @param title          标题
+     * @param isElevation    是否设置阴影
+     * @param isCanBack      是否设置返回键
+     * @param isImmersionBar 是否设置沉浸状态栏
+     */
+    protected void setToolbar(Toolbar toolbar, String title, boolean isElevation, boolean isCanBack, boolean isImmersionBar) {
+        toolbar.setTitle(title);
+        if ((getActivity()) != null) {
+            ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        }
+        if (VersionUtils.isLollipop() && isElevation) {
+            toolbar.setElevation(DensityUtils.dp2px(4f));
+        }
+        if (isImmersionBar) {
+            mImmersionBar.titleBar(toolbar).init();
+        }
+        ActionBar supportActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (isCanBack && supportActionBar != null) {
+            supportActionBar.setDisplayHomeAsUpEnabled(true);
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    pop();
+                }
+            });
+        }
+    }
+
+    /**
+     * 设置toolbar
+     *
+     * @param title 标题
+     */
+    protected void setToolbar(Toolbar toolbar, String title) {
+        toolbar.setTitle(title);
+        if ((getActivity()) != null) {
+            ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        }
+        if (VersionUtils.isLollipop()) {
+            toolbar.setElevation(DensityUtils.dp2px(4f));
+        }
+    }
+
+    /**
+     * 透明状态栏
+     *
+     * @param toolbar toolbar
+     */
+    protected void translucentStatus(Toolbar toolbar) {
+        mImmersionBar.titleBar(toolbar).init();
+    }
+
+    protected void translucentStatus() {
+        mImmersionBar.init();
     }
 
     @Override
@@ -128,11 +217,6 @@ public abstract class BaseFragment<P extends IPresent> extends SupportFragment i
         return context;
     }
 
-    protected void translucentStatus(Toolbar toolbar) {
-        mImmersionBar.titleBar(toolbar).init();
-    }
-
-
     public void showLoadingDiaolg() {
         loadingDialog = new MaterialDialog.Builder(context)
                 .content("正在加载...").show();
@@ -156,19 +240,12 @@ public abstract class BaseFragment<P extends IPresent> extends SupportFragment i
     }
 
     /**
-     * 显示toast
+     * 显示toasty
      *
      * @param text 提示信息
      */
-    private Toast toast;
-
     public void showToasty(String text) {
-        if (toast != null) {
-            toast.cancel();
-            toast = null;
-        }
-        toast = Toasty.info(AppUtils.getContext(), text, Toast.LENGTH_SHORT);
-        toast.show();
+        Toasty.info(AppUtils.getContext(), text, Toast.LENGTH_SHORT).show();
     }
 
     /**

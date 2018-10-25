@@ -12,11 +12,12 @@ import android.graphics.drawable.Drawable;
  * desc:
  */
 
-public class BitmapUtil {
+public class BitmapUtils {
+
     /**
      * Drawable转Bitmap
      *
-     * @param drawable
+     * @param drawable drawable
      * @return Bitmap
      */
     public static Bitmap drawableToBitmap(Drawable drawable) {

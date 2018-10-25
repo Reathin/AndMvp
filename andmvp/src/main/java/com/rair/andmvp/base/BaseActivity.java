@@ -126,7 +126,7 @@ public abstract class BaseActivity<P extends IPresent> extends SupportActivity i
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
         if (VersionUtils.isLollipop()) {
-            toolbar.setElevation(DensityUtils.dip2px(this, 4f));
+            toolbar.setElevation(DensityUtils.dip2px(4f));
         }
         if (isCanBack && getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -150,7 +150,7 @@ public abstract class BaseActivity<P extends IPresent> extends SupportActivity i
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
         if (VersionUtils.isLollipop()) {
-            toolbar.setElevation(DensityUtils.dip2px(this, 4f));
+            toolbar.setElevation(DensityUtils.dip2px(4f));
         }
         if (isCanBack && getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -178,7 +178,7 @@ public abstract class BaseActivity<P extends IPresent> extends SupportActivity i
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
         if (VersionUtils.isLollipop() && isElevation) {
-            toolbar.setElevation(DensityUtils.dip2px(this, 4f));
+            toolbar.setElevation(DensityUtils.dip2px(4f));
         }
         if (isCanBack && getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -200,7 +200,7 @@ public abstract class BaseActivity<P extends IPresent> extends SupportActivity i
 
     protected void translucentStatus(Toolbar toolbar) {
         if (VersionUtils.isLollipop()) {
-            toolbar.setElevation(DensityUtils.dip2px(this, 4f));
+            toolbar.setElevation(DensityUtils.dip2px(4f));
         }
         mImmersionBar.titleBar(toolbar).init();
     }
@@ -233,7 +233,7 @@ public abstract class BaseActivity<P extends IPresent> extends SupportActivity i
     }
 
     /**
-     * 加载dialog
+     * 消息dialog
      */
     public void showMessageDialog(String message) {
         messageDialog = new MaterialDialog.Builder(this)
@@ -247,19 +247,12 @@ public abstract class BaseActivity<P extends IPresent> extends SupportActivity i
     }
 
     /**
-     * 显示toast
+     * 显示toasty
      *
      * @param text 提示信息
      */
-    private Toast toast;
-
     public void showToasty(String text) {
-        if (toast != null) {
-            toast.cancel();
-            toast = null;
-        }
-        toast = Toasty.info(AppUtils.getContext(), text, Toast.LENGTH_SHORT);
-        toast.show();
+        Toasty.info(AppUtils.getContext(), text, Toast.LENGTH_SHORT).show();
     }
 
     /**
