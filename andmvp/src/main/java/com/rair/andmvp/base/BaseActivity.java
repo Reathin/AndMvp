@@ -1,6 +1,7 @@
 package com.rair.andmvp.base;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -11,6 +12,10 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.gyf.barlibrary.ImmersionBar;
+import com.r0adkll.slidr.Slidr;
+import com.r0adkll.slidr.model.SlidrConfig;
+import com.r0adkll.slidr.model.SlidrInterface;
+import com.r0adkll.slidr.model.SlidrPosition;
 import com.rair.andmvp.utils.AppUtils;
 import com.rair.andmvp.utils.DensityUtils;
 import com.rair.andmvp.utils.VersionUtils;
@@ -31,11 +36,11 @@ public abstract class BaseActivity<P extends IPresent> extends SupportActivity i
     private IDelegate mDelegate;
     private P p;
     protected Activity context;
-
     protected ImmersionBar mImmersionBar;
     private Unbinder unbinder;
     private MaterialDialog loadingDialog;
     private MaterialDialog messageDialog;
+    protected SlidrInterface slidrInterface;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +50,7 @@ public abstract class BaseActivity<P extends IPresent> extends SupportActivity i
         BaseApplication.getInstance().addActivity(this);
         mImmersionBar = ImmersionBar.with(this);
         bindUI(null);
+        slidrConfig();
         initView(savedInstanceState);
         initData();
     }
@@ -52,6 +58,13 @@ public abstract class BaseActivity<P extends IPresent> extends SupportActivity i
     @Override
     public void bindUI(View rootView) {
         unbinder = ButterKnife.bind(this);
+    }
+
+    private void slidrConfig() {
+        SlidrConfig config = new SlidrConfig.Builder().position(SlidrPosition.LEFT).sensitivity(1f)
+                .scrimColor(Color.TRANSPARENT).scrimStartAlpha(0.8f).scrimEndAlpha(0f).edge(true)
+                .velocityThreshold(2400).distanceThreshold(0.25f).edgeSize(0.18f).build();
+        slidrInterface = Slidr.attach(this, config);
     }
 
     protected IDelegate getIDelegate() {
