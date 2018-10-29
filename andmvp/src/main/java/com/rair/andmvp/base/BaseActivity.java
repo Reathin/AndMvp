@@ -16,9 +16,13 @@ import com.r0adkll.slidr.Slidr;
 import com.r0adkll.slidr.model.SlidrConfig;
 import com.r0adkll.slidr.model.SlidrInterface;
 import com.r0adkll.slidr.model.SlidrPosition;
+import com.rair.andmvp.anno.BindEventBus;
 import com.rair.andmvp.utils.AppUtils;
 import com.rair.andmvp.utils.DensityUtils;
+import com.rair.andmvp.utils.EventBusUtils;
 import com.rair.andmvp.utils.VersionUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -49,6 +53,9 @@ public abstract class BaseActivity<P extends IPresent> extends SupportActivity i
         setContentView(getLayoutId());
         BaseApplication.getInstance().addActivity(this);
         mImmersionBar = ImmersionBar.with(this);
+        if (getClass().isAnnotationPresent(BindEventBus.class)) {
+            EventBusUtils.register(this);
+        }
         bindUI(null);
         slidrConfig();
         initView(savedInstanceState);
@@ -107,6 +114,9 @@ public abstract class BaseActivity<P extends IPresent> extends SupportActivity i
         }
         if (getP() != null) {
             getP().detachV();
+        }
+        if (getClass().isAnnotationPresent(BindEventBus.class)) {
+            EventBusUtils.unregister(this);
         }
         getIDelegate().destory();
         p = null;

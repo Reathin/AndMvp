@@ -15,9 +15,13 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.gyf.barlibrary.ImmersionBar;
+import com.rair.andmvp.anno.BindEventBus;
 import com.rair.andmvp.utils.AppUtils;
 import com.rair.andmvp.utils.DensityUtils;
+import com.rair.andmvp.utils.EventBusUtils;
 import com.rair.andmvp.utils.VersionUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -55,6 +59,9 @@ public abstract class BaseFragment<P extends IPresent> extends SupportFragment i
             if (viewGroup != null) {
                 viewGroup.removeView(rootView);
             }
+        }
+        if (this.getClass().isAnnotationPresent(BindEventBus.class)) {
+            EventBusUtils.register(this);
         }
         mImmersionBar = ImmersionBar.with(this);
         bindUI(rootView);
@@ -199,6 +206,9 @@ public abstract class BaseFragment<P extends IPresent> extends SupportFragment i
         }
         if (getP() != null) {
             getP().detachV();
+        }
+        if (this.getClass().isAnnotationPresent(BindEventBus.class)) {
+            EventBusUtils.unregister(this);
         }
         getIDelegate().destory();
         p = null;

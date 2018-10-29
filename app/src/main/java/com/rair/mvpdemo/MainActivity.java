@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
 
+import com.rair.andmvp.anno.BindEventBus;
 import com.rair.andmvp.base.BaseActivity;
 
 import butterknife.BindView;
