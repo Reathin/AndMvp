@@ -5,6 +5,10 @@ MVP框架，基类封装，集成工具类。
 
 ### 使用
 
+```gradle
+compile 'com.rairmmd:andmvp:1.0.0'
+```
+
 #### BaseApplication
 先新建一个类继承BaseApplication
 ```java
@@ -40,7 +44,8 @@ public class App extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        KLog.init(true, "Rair");
+        initLog(true, "Rair");
+        initToasty(R.color.red);
     }
 }
 
@@ -62,7 +67,7 @@ buildTypes {
 ```
 然后这么初始化：
 ```java
-KLog.init(BuildConfig.LOG_DEBUG, "Rair");
+initLog(BuildConfig.LOG_DEBUG, "Rair");
 ```
 如果想调用V的showToasty()方法，可以在App初始化时配置你喜欢的颜色
 ```java
@@ -71,10 +76,8 @@ public class App extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        KLog.init(BuildConfig.LOG_DEBUG, "Rair");
-        Toasty.Config.getInstance()
-                .setInfoColor(ContextCompat.getColor(this, R.color.colorAccent))
-                .apply();
+        initLog(BuildConfig.LOG_DEBUG, "Rair");
+        initToasty(R.color.colorAccent);
     }
 }
 ```
