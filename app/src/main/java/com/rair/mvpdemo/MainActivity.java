@@ -9,6 +9,8 @@ import com.rair.andmvp.base.BaseActivity;
 
 import butterknife.BindView;
 
+import static com.rair.andmvp.utils.AppUtils.getString;
+
 public class MainActivity extends BaseActivity<MainPresenter> {
 
     @BindView(R.id.toolbar)

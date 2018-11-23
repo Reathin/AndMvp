@@ -5,7 +5,7 @@ apply plugin: 'com.jfrog.bintray'
 def siteUrl = 'https://github.com/Rairmmd/AndMvp'
 def gitUrl = 'https://github.com/Rairmmd/AndMvp.git'
 group = "com.rairmmd"
-version = "1.0.0"
+version = "1.0.1"
 
 android {
     compileSdkVersion 27
@@ -22,7 +22,11 @@ android {
         abortOnError false
     }
 }
-
+repositories {
+    google()
+    jcenter()
+    maven { url "https://jitpack.io" }
+}
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     api 'com.android.support:appcompat-v7:27.1.1'
