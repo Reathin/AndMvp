@@ -1,1 +1,1 @@
-include ':app', ':andmvp'
+include ':module_app', ':andmvp'

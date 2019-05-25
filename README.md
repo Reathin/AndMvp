@@ -1,4 +1,5 @@
 ### AndMvp
+
 A simple one MVP library for Android.
 
 MVP框架，基类封装，集成工具类。
@@ -6,18 +7,27 @@ MVP框架，基类封装，集成工具类。
 ### 使用
 
 ```gradle
-compile 'com.rairmmd:andmvp:1.0.0'
+compile 'com.rairmmd:andmvp:1.0.2'
 ```
 
 #### BaseApplication
-先新建一个类继承BaseApplication
+必须自定义一个application继承自BaseApplication，并在manifest配置自定义的application：
 ```java
 public class App extends BaseApplication {
-    ......
-}
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        //初始化日志打印
+        initLog(true, "rair");
+        //初始化toasty颜色
+        initToast(R.color.colorAccent);
+        //初始化全局异常捕获
+        initCrashHandler();
+    }
+}
 ```
-在AndroidManifest.xml中配置name为刚才新建的App类
+在AndroidManifest.xml中配置自定义的application：
 ```xml
 <application
     android:name=".App"
@@ -37,20 +47,7 @@ public class App extends BaseApplication {
 </application>
 
 ```
-如果想调用内置的Log库请在Application中调用KLog的初始化方法
-```java
-public class App extends BaseApplication {
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        initLog(true, "Rair");
-        initToasty(R.color.red);
-    }
-}
-
-```
-可在build.gradle中配置开发模式打印log
+可在build.gradle中配置开发模式打印log：
 ```groovy
 buildTypes {
     release {
@@ -69,7 +66,7 @@ buildTypes {
 ```java
 initLog(BuildConfig.LOG_DEBUG, "Rair");
 ```
-如果想调用V的showToasty()方法，可以在App初始化时配置你喜欢的颜色
+如果想调用showToasty()方法，可以在App初始化时配置你喜欢的颜色：
 ```java
 public class App extends BaseApplication {
 
@@ -84,7 +81,7 @@ public class App extends BaseApplication {
 也可参考Toasty原项目的使用。
 
 #### BaseActivity
-Activity基类，继承自fragmentation的SupportActivity。
+Activity基类：
 * 没有P的情况
 ```java
 public class MainActivity extends BaseActivity {
@@ -134,6 +131,10 @@ public class MainActivity extends BaseActivity<MainPresenter> {
         loadRootFragment(R.id.fl_container, MainFragment.newInstance());
     }
 
+    public void showData("来自P的内容"){
+        //显示到控件  或别的处理
+    }
+    
     @Override
     public int getLayoutId() {
         return R.layout.activity_main;
@@ -150,54 +151,85 @@ public class MainActivity extends BaseActivity<MainPresenter> {
 P继承自BasePresent<T>
 ```java
 public class MainPresenter extends BasePresent<MainActivity> {
-
-
+    public void loadInNet(){
+        //do something...
+        getV.showData("需要告诉给V的内容");
+    }
 }
 ```
 
-Fragment和Activity一样
+```java
+//显示加载对话框
+showLoading();  
+showLoading("loading...");
+//显示toast
+showToasy("123"); 
+showToast("123");
+//设置Toolbar 有多个重载的方法
+setToolbar(); 
+//是否允许Activity侧滑返回 Fragment没有此方法
+slidrInterface.unlock();  
+slidrInterface.lock();
+```
+BaseFragment和Activity用法几乎一样。
 
+#### XRouter
+
+XRouter.newIntent(Context context).to(who.class).launch();
+```java
+XRouter.newIntent(MainActivity.this).to(SecondActivity.class).launch();
+```
+#### ImageLoader
+```java
+//加载图片，多个重载的方法
+load(String url, ImageView target);
+load(String url, @DrawableRes int placeholder, ImageView target);
+load(String url, Drawable placeholder, ImageView target);
+load(@DrawableRes int resId, ImageView target)
+```
 
 ### 使用到的开源库
 ```groovy
-api 'com.android.support:appcompat-v7:27.1.1'
-//Rx
-api 'io.reactivex.rxjava2:rxjava:2.1.8'
-api 'io.reactivex.rxjava2:rxandroid:2.0.1'
-api 'com.squareup.retrofit2:retrofit:2.3.0'
-api 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-api 'com.squareup.retrofit2:converter-gson:2.3.0'
-//权限
-api 'com.yanzhenjie:permission:1.1.2'
-//ButterKnife
-api 'com.jakewharton:butterknife:8.8.1'
-annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-//Dialog
-api 'com.afollestad.material-dialogs:core:0.9.6.0'
-//Toasty
-api 'com.github.GrenderG:Toasty:1.2.8'
-//Klog
-api 'com.github.zhaokaiqiang.klog:library:1.6.0'
-//fragmentation
-api 'me.yokeyword:fragmentation:1.3.3'
-//状态栏
-api 'com.gyf.barlibrary:barlibrary:2.3.0'
-//鲁班图片压缩
-api 'top.zibin:Luban:1.1.3'
-//Picasso
-api 'com.squareup.picasso:picasso:2.5.2'
-//图片选择
-api 'com.yanzhenjie:album:2.1.1'
-//适配器
-api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.36'
-//EventBus
-api "org.greenrobot:eventbus:3.1.1"
+    api 'com.android.support:appcompat-v7:28.0.0'
+    //Rx
+    api 'io.reactivex.rxjava2:rxjava:2.2.2'
+    api 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    api 'com.squareup.retrofit2:retrofit:2.4.0'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    api 'com.squareup.retrofit2:converter-gson:2.4.0'
+    api 'com.squareup.retrofit2:converter-scalars:2.4.0'
+    //权限
+    api 'com.yanzhenjie:permission:1.1.2'
+    //ButterKnife
+    api 'com.jakewharton:butterknife:8.8.1'
+    //LoadingDialog
+    api 'com.github.gittjy:LoadingDialog:1.0.2'
+    //Toasty
+    api 'com.github.GrenderG:Toasty:1.3.1'
+    //Klog
+    api 'com.github.zhaokaiqiang.klog:library:1.6.0'
+    //fragmentation
+    api 'me.yokeyword:fragmentation:1.3.6'
+    //状态栏
+    api 'com.gyf.barlibrary:barlibrary:2.3.0'
+    //鲁班图片压缩
+    api 'top.zibin:Luban:1.1.8'
+    //Picasso
+    api 'com.squareup.picasso:picasso:2.71828'
+    //图片选择
+    api 'com.yanzhenjie:album:2.1.3'
+    //适配器
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46'
+    //EventBus
+    api "org.greenrobot:eventbus:3.1.1"
+    //侧滑退出
+    api 'com.r0adkll:slidableactivity:2.0.6'
 ```
 * AndPermission：动态权限申请
 * RxJava2:RxJava2
 * Retrofit2:Retrofit2网络请求
 * ButterKnife:ButterKnife视图注入
-* material-dialog:MD风格Dialog
+* LoadingDialog:IOS风格Dialog
 * Toasty:Toasty，一款漂亮的Toast
 * KLog:Log日志库
 * fragmentation:对Activity和Fragment友好封装
